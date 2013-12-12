@@ -40,8 +40,6 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-
-
 var existingArticles = [];
 
 io.sockets.on('connection', function(socket) {
@@ -58,15 +56,15 @@ io.sockets.on('connection', function(socket) {
 	}, 10000);
 });
 
-function checkNew(json) {
-	var article = _.find(existingArticles, function(e, i){ return e.id == json.id; })
-	if(!article) {
-		var cloned = cloneObj(json);
-		cloned.isNew = true;
-		return cloned;
+	function checkNew(json) {
+		var article = _.find(existingArticles, function(e, i){ return e.id == json.id; })
+		if(!article) {
+			var cloned = cloneObj(json);
+			cloned.isNew = true;
+			return cloned;
+		}
+		return json;
 	}
-	return json;
-}
 
 function waitingListArticle(json) {
 	return "<li class=\""+ (json.isNew ? 'new' : '') +"\">" + div(json.title) + img(json.image) +"</li>";
