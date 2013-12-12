@@ -10,6 +10,6 @@
     <p>Welcome to {{ title }}</p>
 
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
-    <script src='/javascripts/jquery-gridster.js'></script>
+    <script src='/javascripts/jquery.gridster.js'></script>
   </body>
 </html>
