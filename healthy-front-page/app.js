@@ -8,8 +8,11 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-
 var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -29,7 +32,14 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/sockets', function(req, res) {
+	res.render('socket', { title: 'Express WebSockets' });
+});
 
-http.createServer(app).listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+io.sockets.on('connection', function(socket) {
+	socket.emit('news', {hello: 'world'});
 });
