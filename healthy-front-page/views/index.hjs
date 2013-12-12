@@ -149,14 +149,13 @@
             }
         };
 
-        // 2. DO SHIT:
+        // 2. SAVING CURRENT LAYOUT
         $body = jQuery('body'),
-            $serializeBtn = jQuery('<button>serialize</button>')
+            $serializeBtn = jQuery('<button>save</button>')
                 .on('click', function() {
                     var ser =  hfp.serializer.serialize();
                     hfp.log('serialized grid', ser);
-                    socket.emit('preview', ser);
-                    hfp.gridster.generate_stylesheet();
+                    socket.emit('save', ser);
                 })
                 .appendTo($body)
     </script>
