@@ -17,16 +17,35 @@ hfp.serializer2 = (function() {
         return jQuery('<div class="gridRow"></div>');
     }
 
+
+    function cloneObj(obj) {
+        var clone = {};
+
+        for (var i in obj) {
+            if (obj[i] && typeof obj[i] == 'object') {
+                clone[i] = cloneObj(obj[i]);
+            } else {
+                clone[i] = obj[i];
+            }
+        }
+        return clone;
+    }
+
+
     function serialize() {
-        var serialized = hfp.gridster.serialize(),
+        return hfp.gridster.serialize();
+        /*var serialized = hfp.gridster.serialize(),
             output = jQuery('<div></div>'),
             item,
             current_row,
-            last_row_num = 1;
+            last_row_num = 1,
+            arrCopy;
 
-        serialized.sort(byPosition).reverse(); // popping is faster, but walks backwards
+        serialized.sort(byPosition); // popping is faster, but walks backwards*/
 
-        current_row = new_row();
+        //arrCopy = cloneObj(serialized);
+
+        /*current_row = new_row();
         while (item = serialized.pop()) {
             var current_row_number = item.row;
             if (current_row_number != last_row_num) {
@@ -37,9 +56,12 @@ hfp.serializer2 = (function() {
                 .addClass('gridUnit')
                 .addClass('span' + item.size_x)
                 .addClass('yspan' + item.size_y));
-        }
-
-        return output.html();
+        }*/
+/*
+        return {
+            serialized: arrCopy,
+            html: output.html()
+        };*/
     }
 
     return {

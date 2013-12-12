@@ -11,7 +11,7 @@ var path = require('path');
 var _ = require('underscore');
 var app = express();
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, { log: false });
 var request = require('request');
 
 // all environments
@@ -47,6 +47,11 @@ server.listen(app.get('port'), function(){
 var existingArticles = [];
 
 io.sockets.on('connection', function(socket) {
+    socket.on('preview', function(data) {
+        //console.log("preview data: ");
+        //console.log(data);
+        socket.broadcast.emit('refresh', data);
+    });
 	setInterval(function() {
 		request('http://api.snd.no/apiconverter/healthyFrontPage/auto', 
 			function (error, response, body) {
