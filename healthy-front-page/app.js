@@ -36,15 +36,17 @@ app.get('/sockets', function(req, res) {
 	res.render('socket', { title: 'Express WebSockets' });
 });
 
-app.get('/articles',function(req, res) {
-    res.render('articles', { title: 'Front page articles' });
-});
+
 
 app.get('/article/:id', function(req, res) {
 	var artId = req.params.id;
 	var json = _.find(existingArticles, function(e, i) { return e.id == artId; });
 	if(json) res.send(article(json));
 	else return res.send("nothing here");
+});
+
+app.get('/articles', function(req, res) {
+	res.send(existingArticles);
 });
 
 server.listen(app.get('port'), function(){
