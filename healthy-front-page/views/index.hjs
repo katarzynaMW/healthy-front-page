@@ -3,9 +3,13 @@
   <head>
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/jquery.gridster.css' />
   </head>
   <body>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
+
+    <script src='/javascripts/jquery-2.0.3.min.js'></script>
+    <script src='/javascripts/jquery-gridster.js'></script>
   </body>
 </html>
