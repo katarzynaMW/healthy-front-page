@@ -106,7 +106,7 @@ io.sockets.on('connection', function(socket) {
 
 	
 		if(wh) {
-			json.score = Math.ceil(wh.clicks / 10) * 10;;
+			json.score = wh.clicks;
 			return json;
 		} else {
 			json.score = 0;
@@ -143,7 +143,7 @@ function addButton() {
 }
 
 function trendingButton(score) {
-	return "<div class=\"progress-radial\" data-popularity=\""+score+"\"> <div class=\"overlay\">"+score+"</div> </div>";
+	return "<div class=\"progress-radial\" data-popularity=\""+(Math.ceil(score / 10) * 10)+"\"> <div class=\"overlay\">"+score+"</div> </div>";
 }
 
 function div(str) {
