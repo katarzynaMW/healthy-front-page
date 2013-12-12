@@ -48,6 +48,7 @@ hfp.buildFromSerialized = function(serialized) {
             console.log('tile ' + id + ' needs populating');
             (function(id) {
                 $.get('/article/' + id, function(data) {
+                    console.log('got content for id '+id+': '+data);
                     $newTile.html(data);
                 });
             })(id);
