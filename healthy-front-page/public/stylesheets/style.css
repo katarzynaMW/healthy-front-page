@@ -6,3 +6,9 @@
     background: silver;
     list-style: none;
 }
+.gridster .article-image {
+    width: 100%;
+}
+.gridster .article-add {
+    display: none;
+}
