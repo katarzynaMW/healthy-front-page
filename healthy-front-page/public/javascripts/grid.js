@@ -19,7 +19,7 @@ hfp.gridster = $(".gridster ul").gridster({
     serialize_params       : function($w, wgd) {
         return {
             //$el: $w,
-            id    : $.data('id'),
+            id    : function() { console.log($w.data('id')); return $w.data('id'); }(),
             col   : wgd.col,
             row   : wgd.row,
             size_x: wgd.size_x,
@@ -42,7 +42,7 @@ hfp.buildFromSerialized = function(serialized) {
         if (id && $newTile.children().length == 0) {
             // please populate me
             console.log('tile ' + id + ' needs populating');
-            $.get('/article/'+id, function(data) {
+            $.get('/article/' + id, function(data) {
                 $newTile.html(data);
             });
         }
