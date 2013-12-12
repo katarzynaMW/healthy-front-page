@@ -4,6 +4,8 @@
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/jquery.gridster.css' />
+        <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/jquery-2.0.3.min.js"></script>
   </head>
   <body>
     <h1>{{ title }}</h1>
@@ -33,7 +35,9 @@
         </div>
     </div>
 
-     <div class="waiting-list"></div>
+     <ul class="waiting-list list-unstyled">
+
+     </ul>
 
     <!-- libraries -->
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
