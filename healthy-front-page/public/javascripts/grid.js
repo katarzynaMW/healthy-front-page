@@ -39,7 +39,7 @@ hfp.buildFromSerialized = function(serialized) {
         var $newTile, id = this.id;
         hfp.gridster.add_widget('<li data-id="' + id + '" />', this.size_x, this.size_y, this.col, this.row);
         $newTile = $('.gridster li[data-id="' + id + '"]').eq(0);
-        if (id && $newTile.children().length == 0) {
+        if (id && $newTile.find('article').length == 0) {
             // please populate me
             console.log('tile ' + id + ' needs populating');
             $.get('/article/' + id, function(data) {
