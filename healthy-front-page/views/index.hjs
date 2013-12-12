@@ -7,5 +7,15 @@
   <body>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="/js/articles-queue"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', ready, false);
+    function ready() {
+        var fpArticlesId = $('#articleList');
+        var articlesQueue = new ArticlesQueue(fpArticlesId);
+    }
+    </script>
   </body>
 </html>
