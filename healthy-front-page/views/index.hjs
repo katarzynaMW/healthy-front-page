@@ -87,7 +87,7 @@
                     </div>
                 </section>
 
-                <section class="context-menu app-col col-sm-3">
+                      <section class="context-menu app-col col-sm-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">Item options</div>
                         <div class="panel-body">
@@ -100,11 +100,10 @@
 
     </div>
 
-
-
     <div id="footer">
-        <div class="container">
-            <p class="text-muted">Place sticky footer content here.</p>
+        <div class="container-fluid">
+            <p class="text-muted pull-left">STP Project (C) 2013, 12th December</p>
+            <button type="button" class="btn btn-lg btn-success btn-export pull-right">Export</button>
         </div>
     </div>
 
