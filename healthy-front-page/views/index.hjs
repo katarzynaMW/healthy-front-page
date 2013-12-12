@@ -4,8 +4,6 @@
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/jquery.gridster.css' />
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/javascripts/jquery-2.0.3.min.js"></script>
   </head>
   <body>
     <h1>{{ title }}</h1>
@@ -15,22 +13,22 @@
         THE GRID<sup><a href="http://www.youtube.com/watch?v=ZITCw6QKrtU">1</a></sup>:
         <div class="gridster">
             <ul>
-                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1"></li>
-                <li data-row="2" data-col="1" data-sizex="1" data-sizey="1"></li>
-                <li data-row="3" data-col="1" data-sizex="1" data-sizey="1"></li>
+                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">a</li>
+                <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">b</li>
+                <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">c</li>
 
-                <li data-row="1" data-col="2" data-sizex="2" data-sizey="1"></li>
-                <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"></li>
+                <li data-row="1" data-col="2" data-sizex="2" data-sizey="1">d</li>
+                <li data-row="2" data-col="2" data-sizex="2" data-sizey="2">e</li>
 
-                <li data-row="1" data-col="4" data-sizex="1" data-sizey="1"></li>
-                <li data-row="2" data-col="4" data-sizex="2" data-sizey="1"></li>
-                <li data-row="3" data-col="4" data-sizex="1" data-sizey="1"></li>
+                <li data-row="1" data-col="4" data-sizex="1" data-sizey="1">f</li>
+                <li data-row="2" data-col="4" data-sizex="2" data-sizey="1">g</li>
+                <li data-row="3" data-col="4" data-sizex="1" data-sizey="1">h</li>
 
-                <li data-row="1" data-col="5" data-sizex="1" data-sizey="1"></li>
-                <li data-row="3" data-col="5" data-sizex="1" data-sizey="1"></li>
+                <li data-row="1" data-col="5" data-sizex="1" data-sizey="1">i</li>
+                <li data-row="3" data-col="5" data-sizex="1" data-sizey="1">j</li>
 
-                <li data-row="1" data-col="6" data-sizex="1" data-sizey="1"></li>
-                <li data-row="2" data-col="6" data-sizex="1" data-sizey="2"></li>
+                <li data-row="1" data-col="6" data-sizex="1" data-sizey="1">k</li>
+                <li data-row="2" data-col="6" data-sizex="1" data-sizey="2">l</li>
             </ul>
         </div>
     </div>
@@ -49,6 +47,30 @@
     </script>
     <script src='/javascripts/grid.js'></script>
     <script src='/javascripts/grid-export/v1.js'></script>
+    <script src='/javascripts/grid-export/v2.js'></script>    
+    <script>
+        // 1. SETUP: choose implementation
+        hfp.serializer = hfp.serializer2; // now you can call hfp.serialize() to get HTML or array
+
+        // 1.5: UTILITY METHOD
+        hfp.log = function(header, stuff) {
+            if (typeof stuff === 'string') {
+                console.log('[' + header + '] ' + stuff)
+            } else {
+                console.group('[' + header + ']');
+                console.dir(stuff);
+                console.groupEnd();
+            }
+        };
+
+        // 2. DO SHIT:
+        $body = jQuery('body'),
+            $serializeBtn = jQuery('<button>serialize</button>')
+                .on('click', function() {
+                    hfp.log('serialized grid', hfp.serializer.serialize())
+                })
+                .appendTo($body)
+    </script>
 
 
     <script>
