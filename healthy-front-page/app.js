@@ -55,6 +55,7 @@ server.listen(app.get('port'), function(){
 
 var existingArticles = [];
 var webhits = [];
+var savedSerial;
 
 setInterval(function() {
 	request('https://webhit.snd.no/webhit/php/getwidgetdata.php?widget=hackday2013&site=ap', 
@@ -67,9 +68,13 @@ setInterval(function() {
 }, 5000);
 
 io.sockets.on('connection', function(socket) {
+	if(savedSerial) socket.emit('refresh', savedSerial);
+
     socket.on('preview', function(data) {
         //console.log("preview data: ");
         //console.log(data);
+        
+        savedSerial = data;
         socket.broadcast.emit('refresh', data);
     });
     setTimeout(function() {
