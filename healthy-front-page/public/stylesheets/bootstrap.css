@@ -5990,7 +5990,7 @@ body {
     height: 100%;
 }
 .header-ap {
-    background: url("../img/header-ap.png") no-repeat scroll 0 0 cover rgba(0, 0, 0, 0);
+    background: url("../img/header-ap.png") no-repeat scroll 0 0% auto rgba(0, 0, 0, 0);
     height: 50px;
     margin-bottom: 10px;
 }
