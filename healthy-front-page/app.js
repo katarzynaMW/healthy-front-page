@@ -44,7 +44,7 @@ app.get('/article/:id', function(req, res) {
 	var artId = req.params.id;
 	var json = _.find(existingArticles, function(e, i) { return e.id == artId; });
 	if(json) res.send(article(json));
-	else return "nothing here";
+	else return res.send("nothing here");
 });
 
 server.listen(app.get('port'), function(){
@@ -59,7 +59,8 @@ io.sockets.on('connection', function(socket) {
         //console.log(data);
         socket.broadcast.emit('refresh', data);
     });
-    request('http://api.snd.no/apiconverter/healthyFrontPage/auto', 
+    setTimeout(function() {
+		request('http://api.snd.no/apiconverter/healthyFrontPage/auto', 
 			function (error, response, body) {
 			  if (!error && response.statusCode == 200) {
 			  	var articles = JSON.parse(body);
@@ -68,6 +69,7 @@ io.sockets.on('connection', function(socket) {
 			    socket.emit("news", content);
 			}
 		});
+	}, 1000);
 	setInterval(function() {
 		request('http://api.snd.no/apiconverter/healthyFrontPage/auto', 
 			function (error, response, body) {
