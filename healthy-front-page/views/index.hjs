@@ -9,9 +9,15 @@
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
 
+    <div id="mainGrid">
+        THE GRID<sup><a href="http://www.youtube.com/watch?v=ZITCw6QKrtU">1</a></sup>:
+        {{> grid}}
+    </div>
 
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
     <script src='/javascripts/jquery.gridster.js'></script>
+    <script src='/javascripts/grid.js'></script>
+    <script src='/javascripts/grid-export/v1.js'></script>
     <script src="/js/articles-queue"></script>
     <script>
     document.addEventListener('DOMContentLoaded', ready, false);
