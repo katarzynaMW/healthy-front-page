@@ -1,16 +1,31 @@
-function ArticlesQueue(id) {
+document.addEventListener('DOMContentLoaded', ready, false);
+
+function ready() {
+    console.log('ready');
+    var articleDataMap = 'data-id';
+    var articlesQueue = new ArticlesQueue('.drop-articles-here', 'published', articleDataMap);
+
+        $('.drop-articles-here').on("click",".article-add", function() {
+            var parentId = $(this).closest('li').attr(articleDataMap);
+            articlesQueue.add(parentId);
+        });
+}
+
+function ArticlesQueue(id, publishedClassName, articleDataMap) {
+    var gridster = $(".gridster ul").gridster().data('gridster');
     return {
         add: function(articleId) {
             //remove from fp list
             var articlesDOMList = $(id).children();
-            var articleDom = articlesDOMList.filter(function(index){
-                if(articlesDOMList[index].getAttribute('data-map') == articleId) {
+            var listElement = articlesDOMList.filter(function(index){
+                if(articlesDOMList[index].getAttribute(articleDataMap) == articleId) {
                     return true;
                 }
             });
-            articleDom.addClass('published');
-            //add to gridster
-
+            listElement.addClass(publishedClassName);
+            gridster.add_widget(listElement);
+        },
+        remove: {
 
         }
     }
