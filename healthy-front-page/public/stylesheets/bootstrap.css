@@ -6032,8 +6032,14 @@ body {
     font-size: 14px;
     color: #464a4f;
 }
-.article-add,
-.article-remove {
+.waiting-list .article-list-container button.article-toggle {
+    background-color: #62c462;
+    color: white;
+}
+.waiting-list .article-list-container button.article-toggle .glyphicon:before {
+    content: "\2b";
+}
+.article-toggle {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -6113,7 +6119,13 @@ body {
     color: black;
     font-weight: bold;
 }
-.main-preview .article-add,
+.main-preview button.article-toggle {
+    background-color: #ee5f5b;
+    color: white;
+}
+.main-preview button.article-toggle .glyphicon:before {
+    content: "\e014";
+}
 .main-preview time {
     display: none !important;
     visibility: hidden !important;
@@ -6178,18 +6190,6 @@ body {
 }
 .progress-radial[data-popularity="100"] {
     background-image: linear-gradient(90deg, #ff0000 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(270deg, #ff0000 50%, #2f3439 50%, #2f3439);
-}
-button.article-add {
-    background-color: #62c462;
-}
-button.article-add .glyphicon:before {
-    content: "\2b";
-}
-button.article-remove {
-    background-color: #ee5f5b;
-}
-button.article-remove .glyphicon:before {
-    content: "\e014";
 }
 .navbar {
     background-image: -webkit-linear-gradient(#484e55, #3a3f44 60%, #313539);
