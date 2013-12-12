@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/stylesheets/jquery.gridster.css' />
     <link href="/stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
         <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/jquery-2.0.3.min.js"></script>
   </head>
@@ -75,12 +76,18 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Front page preview</div>
                         <div class="panel-body">
-                            <div id="phone-mockup"></div>
+                            <div id="phone-mockup">
+                                <div id="phone-bg">
+                                    <div id="layout-preview">
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
 
-                <section class="context-menu app-col col-sm-3">
+                      <section class="context-menu app-col col-sm-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">Item options</div>
                         <div class="panel-body">
@@ -93,11 +100,10 @@
 
     </div>
 
-
-
     <div id="footer">
-        <div class="container">
-            <p class="text-muted">Place sticky footer content here.</p>
+        <div class="container-fluid">
+            <p class="text-muted pull-left">STP Project (C) 2013, 12th December</p>
+            <button type="button" class="btn btn-lg btn-success btn-export pull-right">Export</button>
         </div>
     </div>
 
@@ -107,28 +113,13 @@
         <div class="gridster">
             <ul>
                 <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">a</li>
-                <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">b</li>
-                <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">c</li>
-
-                <li data-row="1" data-col="2" data-sizex="2" data-sizey="1">d</li>
-                <li data-row="2" data-col="2" data-sizex="2" data-sizey="2">e</li>
-
-                <li data-row="1" data-col="4" data-sizex="1" data-sizey="1">f</li>
-                <li data-row="2" data-col="4" data-sizex="2" data-sizey="1">g</li>
-                <li data-row="3" data-col="4" data-sizex="1" data-sizey="1">h</li>
-
-                <li data-row="1" data-col="5" data-sizex="1" data-sizey="1">i</li>
-                <li data-row="3" data-col="5" data-sizex="1" data-sizey="1">j</li>
-
-                <li data-row="1" data-col="6" data-sizex="1" data-sizey="1">k</li>
-                <li data-row="2" data-col="6" data-sizex="1" data-sizey="2">l</li>
+                <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">b</li>
+                <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">c</li>
             </ul>
         </div>
     </div>
 
-     <ul class="waiting-list list-unstyled">
 
-     </ul>
 
     <!-- libraries -->
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
@@ -140,8 +131,9 @@
         var hfp = hfp || {}; // our namespace
     </script>
     <script src='/javascripts/grid.js'></script>
-    <script src='/javascripts/grid-export/v1.js'></script>
-    <script src='/javascripts/grid-export/v2.js'></script>    
+    <!--<script src='/javascripts/grid-export/v1.js'></script>-->
+    <script src='/javascripts/grid-export/v2.js'></script>
+
     <script>
         // 1. SETUP: choose implementation
         hfp.serializer = hfp.serializer2; // now you can call hfp.serialize() to get HTML or array
@@ -161,26 +153,32 @@
         $body = jQuery('body'),
             $serializeBtn = jQuery('<button>serialize</button>')
                 .on('click', function() {
-                    hfp.log('serialized grid', hfp.serializer.serialize())
+                    var ser =  hfp.serializer.serialize();
+                    hfp.log('serialized grid', ser);
+                    socket.emit('preview', ser);
+                    hfp.gridster.generate_stylesheet();
                 })
                 .appendTo($body)
     </script>
 
-
     <script>
-      var loc = window.location, new_uri;
-      if (loc.protocol === "https:") {
-          new_uri = "wss:";
-      } else {
-          new_uri = "ws:";
-      }
-      new_uri += "//" + loc.host;
+        var loc = window.location, new_uri, i = 1;
+        if (loc.protocol === "https:") {
+            new_uri = "wss:";
+        } else {
+            new_uri = "ws:";
+        }
+        new_uri += "//" + loc.host;
 
 
-      var socket = io.connect(new_uri);
-      socket.on('news', function (data) {
-        $(".drop-articles-here").html(data);
-      });
+        var socket = io.connect(new_uri);
+        socket.on('news', function (data) {
+            $(".drop-articles-here").html(data);
+        });
+        socket.on('refresh', function(serialized) {
+            console.log('refresh' + (i++));
+            hfp.buildFromSerialized(serialized);
+        })
     </script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script>
