@@ -1,38 +1,53 @@
 document.addEventListener('DOMContentLoaded', ready, false);
 
 function ready() {
-    var articleDataMap = 'data-id';
+    var articlesQueue = new ArticlesQueue('.drop-articles-here', 'published', 'data-id');
 
-    var articlesQueue = new ArticlesQueue('.drop-articles-here', 'published', articleDataMap);
+    attachClickEvt('.drop-articles-here', '.article-add',articlesQueue.add);
+    attachClickEvt('.gridster', '.article-remove',articlesQueue.remove);
 
-    $('.drop-articles-here').on("click",".article-add", function() {
-        var parentId = $(this).closest('li').attr(articleDataMap);
-        articlesQueue.add(parentId);
-    });
-
-    $('.gridster').on("click",".article-remove", function() {
-        var parentId = $(this).closest('li').attr(articleDataMap);
-        articlesQueue.add(parentId);
-    });
+//    $('.drop-articles-here').on("click",".article-add", function() {
+//        var parentId = $(this).closest('li').attr(articleDataMap);
+//        articlesQueue.add(parentId);
+//    });
+//
+//    $('.gridster').on("click",".article-remove", function() {
+//        var parentId = $(this).closest('li').attr(articleDataMap);
+//        articlesQueue.remove(parentId);
+//    });
 }
 
-function ArticlesQueue(id, publishedClassName, articleDataMap, addCb) {
+function ArticlesQueue(id, publishedClassName, articleDataMapName, addCb) {
     var gridster = $(".gridster ul").gridster().data('gridster');
     return {
         add: function(articleId) {
-            //remove from fp list
-            var articlesDOMList = $(id).children();
-            var listElement = articlesDOMList.filter(function(index){
-                if(articlesDOMList[index].getAttribute(articleDataMap) == articleId) {
-                    return true;
-                }
-            });
+            var listElement = findChildElementWithArticleId(articleId, id, articleDataMapName);
             listElement.find('.article-add').removeClass('article-add').addClass('article-remove');
             gridster.add_widget(listElement);
             hfp.sendUpdate();
         },
-        remove: {
-
+        remove: function(articleId){
+            var listElement = findChildElementWithArticleId(articleId, '.gridster ul', articleDataMapName);
+            gridster.remove_widget(listElement);
+            hfp.sendUpdate();
         }
     }
+}
+
+function findChildElementWithArticleId(articleId, parentEl, articleDataMapName) {
+    var articlesDOMList = $(parentEl).children();
+    var listElement = articlesDOMList.filter(function(index){
+        if(articlesDOMList[index].getAttribute(articleDataMapName) == articleId) {
+            return true;
+        }
+    });
+    return listElement;
+
+}
+
+function attachClickEvt(parentElement, childElement, articleQueueFunction) {
+    $(parentElement).on("click", childElement, function() {
+        var parentId = $(this).closest('li').attr('data-id');
+        articleQueueFunction(parentId);
+    });
 }
