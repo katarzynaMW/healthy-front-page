@@ -39,7 +39,8 @@ hfp.gridster = $(".gridster ul").gridster({
     .data('gridster'); // this extracts the API object from the jQ dom object
 hfp.gridster.generate_stylesheet();
 
-var interval;
+var interval,
+    pending = {};
 
 hfp.buildFromSerialized = function(serialized) {
     clearInterval(interval);
@@ -59,9 +60,12 @@ hfp.buildFromSerialized = function(serialized) {
             // please populate me
             console.log('tile ' + id + ' needs populating');
                 (function(id) {
+                    if (pending[id]) return;
+                    pending[id] = true;
                     $.get('/article/' + id, function(data) {
                         console.log('got content for id '+id+': '+data);
-                        $('.gridster li[data-id="'+id+'"]').html(data);
+                        $('.gridster li[data-id="'+id+'"]').append(data);
+                        pending[id] = undefined;
                     });
             })(id);
         }
