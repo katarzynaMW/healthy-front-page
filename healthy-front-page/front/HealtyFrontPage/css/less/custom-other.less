@@ -78,12 +78,82 @@ html, body {
 
 // Main preview
 
-.main-preview {
+/*.main-preview {
+  .panel-body {
+    height: 90%;
+    text-align: center;
+    overflow-y: scroll;
+  }
 
   #phone-mockup {
-    background: url('../img/iphone-bg.svg');
+    background-color: @gray-dark;
+    border-radius: 35px;
+    display: inline-block;
+    max-width: 460px;
+    position: relative;
+    width: 50%;
 
+    #dummy {
+      padding-top: 190%;
+    }
+
+    #phone-bg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      #layout-preview {
+        border: 1px solid @gray;
+        height: 90%;
+        margin: 0 auto;
+        position: relative;
+        top: 5%;
+        width: 90%;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+    }
   }
+}*/
+
+.main-preview {
+  .panel-body {
+    height: 90%;
+    text-align: center;
+    overflow-y: scroll;
+  }
+
+  #phone-mockup {
+    background-color: @gray-dark;
+    border-radius: 35px;
+    display: inline-block;
+    position: relative;
+    width: 360px;
+    height: 648px;
+
+    #phone-bg {
+      position: relative;
+
+      #layout-preview {
+        border: 1px solid @gray;
+        height: 568px;
+        width: 320px;
+        margin: 0 auto;
+        position: relative;
+        top: 40px;
+        width: 90%;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+    }
+  }
+}
+
+.btn-export {
+  padding: 10px 30px;
+  margin-top: 5px;
 }
 
 // Other
