@@ -47,6 +47,11 @@ server.listen(app.get('port'), function(){
 var existingArticles = [];
 
 io.sockets.on('connection', function(socket) {
+    socket.on('preview', function(data) {
+        //console.log("preview data: ");
+        //console.log(data);
+        socket.broadcast.emit('refresh', data);
+    });
 	setInterval(function() {
 		request('http://api.snd.no/apiconverter/healthyFrontPage/auto', 
 			function (error, response, body) {
