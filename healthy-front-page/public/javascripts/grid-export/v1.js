@@ -2,15 +2,28 @@
 $(function() {
 
     var $body = jQuery('body'),
-        $serializeBtn = jQuery('<button>serialize</button>')
+        $serializeBtn = jQuery('<button>serialize v1</button>')
             .on('click', serialize)
-            .appendTo($body);
+            .appendTo($body),
+        log = function(stuff) {
+            if (typeof stuff === 'string') {
+                console.log('[grid-export basic] ' + stuff)
+            } else {
+                console.group('[grid-export basic]');
+                console.dir(stuff);
+                console.groupEnd();
+            }
+        }
 
     function serialize() {
-        console.log(hfp.gridster);
-        var serialized = hfp.gridster.serialize();
-        console.log(serialized);
-        alert(JSON.stringify(serialized));
+        /* this was actually supposed to return the absolute things */
+
+        var css = $('head style').last().html(),
+            html = hfp.gridster.$el.html(),
+
+            output = '<style>' + css + '</style>' + html;
+
+        log({css: css, html: html, output: output});
     }
 
 });
