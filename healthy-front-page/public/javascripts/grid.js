@@ -1,7 +1,7 @@
 /*global hfp*/
 hfp.sendUpdate = function() {
     var ser = hfp.serializer.serialize();
-    hfp.log('serialized grid', ser);
+//    hfp.log('serialized grid', ser);
     socket.emit('preview', ser);
     $('style:not(:last-of-type)').remove();
 };
@@ -33,8 +33,6 @@ hfp.gridster = $(".gridster ul").gridster({
 hfp.gridster.generate_stylesheet();
 
 hfp.buildFromSerialized = function(serialized) {
-    console.log(serialized);
-    console.log(typeof serialized);
     hfp.gridster.remove_all_widgets();
     $.each(serialized, function() {
         hfp.gridster.add_widget('<li />', this.size_x, this.size_y, this.col, this.row);
