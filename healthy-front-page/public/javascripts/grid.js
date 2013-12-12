@@ -14,7 +14,10 @@ hfp.gridster = $(".gridster ul").gridster({
     resize                 : {
         enabled : true,
         max_size: [2, 2], // todo change to 2,1 maybe
-        stop    : hfp.sendUpdate
+        stop    : hfp.sendUpdate,
+        resize: function(e, ui, $widget) {
+            $widget.find('p.title').fitText();
+        }
     },
     serialize_params       : function($w, wgd) {
         return {

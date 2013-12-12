@@ -100,6 +100,7 @@
     <!-- libraries -->
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
     <script src='/javascripts/jquery.gridster.js'></script>
+    <script src="/javascripts/jquery.fittext.js"></script>
     <script src="/javascripts/articles-queue.js"></script>
 
     <!-- env and our scripts -->
