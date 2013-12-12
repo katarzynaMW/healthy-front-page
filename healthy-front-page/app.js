@@ -8,6 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var _ = require('underscore');
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
@@ -48,15 +49,52 @@ io.sockets.on('connection', function(socket) {
 		request('http://api.snd.no/apiconverter/healthyFrontPage/auto', 
 			function (error, response, body) {
 			  if (!error && response.statusCode == 200) {
-			  	var content = JSON.parse(body).map(waitingListArticle).join("")
+			  	var articles = JSON.parse(body);
+			  	var content = articles.map(checkNew).map(waitingListArticle).join("");
+			  	existingArticles = articles;
 			    socket.emit("news", "<ul>" + content + "</ul>");
 			}
 		})
 	}, 10000);
 });
 
+function checkNew(json) {
+	var article = _.find(existingArticles, function(e, i){ return e.id == json.id; })
+	if(!article) {
+		var cloned = cloneObj(json);
+		cloned.isNew = true;
+		return cloned;
+	}
+	return json;
+}
+
 function waitingListArticle(json) {
-	return "<li>" + json.title + "</li>";
+	return "<li class=\""+ (json.isNew ? 'new' : '') +"\">" + div(json.title) + img(json.image) +"</li>";
+}
+
+function div(str) {
+	return "<div>" + str + "</div>";
+}
+
+function img(str) {
+	if(str) {
+		return "<img src=\""+str+"\"/>";	
+	} else {
+		return "";
+	}
+}
+
+function cloneObj(obj) {
+    var clone = {};
+
+    for (var i in obj) {
+        if (obj[i] && typeof obj[i] == 'object') {
+            clone[i] = cloneObj(obj[i]);
+        } else {
+            clone[i] = obj[i];
+        }
+    }
+    return clone;
 }
 
 

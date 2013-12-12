@@ -9,6 +9,7 @@
     "express": "3.4.1",
     "hjs": "*",
     "socket.io": "~0.9.16",
-    "request": "~2.29.0"
+    "request": "~2.29.0",
+    "underscore": "~1.5.2"
   }
 }
