@@ -151,7 +151,7 @@ function div(str) {
 }
 
 function p(str) {
-	return "<p class=\"title\">" + str + "</p>";
+	return "<p class=\"title\" contenteditable=\"true\">" + str + "</p>";
 }
 
 function time(str) {
