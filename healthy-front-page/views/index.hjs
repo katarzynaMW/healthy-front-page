@@ -25,32 +25,9 @@
                     </button>
                 </div>
                 <div id="navbar-main" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a id="themes" href="#" data-toggle="dropdown" class="dropdown-toggle">Menu<span class="caret"></span></a>
-                            <ul aria-labelledby="themes" class="dropdown-menu">
-                                <li><a href="../default/" tabindex="-1">Default</a></li>
-                                <li class="divider"></li>
-                                <li><a href="../amelia/" tabindex="-1">Amelia</a></li>
-                                <li><a href="../cerulean/" tabindex="-1">Cerulean</a></li>
-                                <li><a href="../cosmo/" tabindex="-1">Cosmo</a></li>
-                                <li><a href="../cyborg/" tabindex="-1">Cyborg</a></li>
-                                <li><a href="../flatly/" tabindex="-1">Flatly</a></li>
-                                <li><a href="../journal/" tabindex="-1">Journal</a></li>
-                                <li><a href="../readable/" tabindex="-1">Readable</a></li>
-                                <li><a href="../simplex/" tabindex="-1">Simplex</a></li>
-                                <li><a href="../slate/" tabindex="-1">Slate</a></li>
-                                <li><a href="../spacelab/" tabindex="-1">Spacelab</a></li>
-                                <li><a href="../united/" tabindex="-1">United</a></li>
-                                <li><a href="../yeti/" tabindex="-1">Yeti</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
                     <ul class="nav navbar-nav navbar-right">
                         <li><a target="_blank" href="#">Hello, User</a></li>
                     </ul>
-
                 </div>
             </div>
         </header>
@@ -79,6 +56,7 @@
                             <div id="phone-mockup">
                                 <div id="phone-bg">
                                     <div id="layout-preview">
+                                        <header class="header-ap"></header>
                                         <!--THE GRID<sup><a href="http://www.youtube.com/watch?v=ZITCw6QKrtU">1</a></sup>:-->
                                         <div class="gridster">
                                             <ul>
