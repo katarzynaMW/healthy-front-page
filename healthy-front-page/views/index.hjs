@@ -2,14 +2,105 @@
 <html>
   <head>
     <title>{{ title }}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/stylesheets/jquery.gridster.css' />
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet">
         <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/jquery-2.0.3.min.js"></script>
   </head>
   <body>
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
+
+    <div id="wrap">
+
+        <!-- Fixed navbar -->
+        <header role="navigation" class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../">Healthy Front Page</a>
+                    <button data-target="#navbar-main" data-toggle="collapse" type="button" class="navbar-toggle">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar-main" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a id="themes" href="#" data-toggle="dropdown" class="dropdown-toggle">Menu<span class="caret"></span></a>
+                            <ul aria-labelledby="themes" class="dropdown-menu">
+                                <li><a href="../default/" tabindex="-1">Default</a></li>
+                                <li class="divider"></li>
+                                <li><a href="../amelia/" tabindex="-1">Amelia</a></li>
+                                <li><a href="../cerulean/" tabindex="-1">Cerulean</a></li>
+                                <li><a href="../cosmo/" tabindex="-1">Cosmo</a></li>
+                                <li><a href="../cyborg/" tabindex="-1">Cyborg</a></li>
+                                <li><a href="../flatly/" tabindex="-1">Flatly</a></li>
+                                <li><a href="../journal/" tabindex="-1">Journal</a></li>
+                                <li><a href="../readable/" tabindex="-1">Readable</a></li>
+                                <li><a href="../simplex/" tabindex="-1">Simplex</a></li>
+                                <li><a href="../slate/" tabindex="-1">Slate</a></li>
+                                <li><a href="../spacelab/" tabindex="-1">Spacelab</a></li>
+                                <li><a href="../united/" tabindex="-1">United</a></li>
+                                <li><a href="../yeti/" tabindex="-1">Yeti</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a target="_blank" href="#">Hello, User</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- app content -->
+        <div class="container-fluid">
+           <div id="main-container" class="row">
+                <section class="waiting-list app-col col-sm-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Article list</div>
+                        <div class="panel-body">
+                            <ul class="drop-articles-here list-unstyled">
+
+                            </ul>
+                           
+                        </div>
+                    </div>
+                </section>
+
+                </section>
+
+                <section class="main-preview app-col col-sm-7">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Front page preview</div>
+                        <div class="panel-body">
+                            <div id="phone-mockup"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="context-menu app-col col-sm-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Item options</div>
+                        <div class="panel-body">
+                            Panel content
+                        </div>
+                    </div>
+                </section>
+           </div>
+        </div>
+
+    </div>
+
+
+
+    <div id="footer">
+        <div class="container">
+            <p class="text-muted">Place sticky footer content here.</p>
+        </div>
+    </div>
+
 
     <div id="mainGrid">
         THE GRID<sup><a href="http://www.youtube.com/watch?v=ZITCw6QKrtU">1</a></sup>:
@@ -88,9 +179,10 @@
 
       var socket = io.connect(new_uri);
       socket.on('news', function (data) {
-        $(".waiting-list").html(data);
+        $(".drop-articles-here").html(data);
       });
     </script>
+    <script src="/javascripts/bootstrap.min.js"></script>
 
   </body>
 </html>
