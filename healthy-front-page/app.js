@@ -40,6 +40,15 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+
+// setInterval(function() {
+	// 
+// }, 10000);
+
 io.sockets.on('connection', function(socket) {
-	socket.emit('news', {hello: 'world'});
+	setInterval(function() {
+		socket.emit('news', {hello: 'world'})
+	}, 1000);
 });
+
+
