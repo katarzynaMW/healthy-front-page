@@ -10,3 +10,7 @@ a {
 #mainGrid {
 
 }
+#mainGrid li {
+    background: silver;
+    list-style: none;
+}
