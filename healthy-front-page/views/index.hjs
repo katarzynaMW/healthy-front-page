@@ -33,6 +33,8 @@
         </div>
     </div>
 
+     <div class="waiting-list"></div>
+
     <!-- libraries -->
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
     <script src='/javascripts/jquery.gridster.js'></script>
@@ -67,5 +69,23 @@
                 })
                 .appendTo($body)
     </script>
+
+
+    <script>
+      var loc = window.location, new_uri;
+      if (loc.protocol === "https:") {
+          new_uri = "wss:";
+      } else {
+          new_uri = "ws:";
+      }
+      new_uri += "//" + loc.host;
+
+
+      var socket = io.connect(new_uri);
+      socket.on('news', function (data) {
+        $(".waiting-list").html(data);
+      });
+    </script>
+
   </body>
 </html>
