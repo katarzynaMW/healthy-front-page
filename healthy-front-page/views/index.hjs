@@ -76,7 +76,13 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Front page preview</div>
                         <div class="panel-body">
-                            <div id="phone-mockup"></div>
+                            <div id="phone-mockup">
+                                <div id="phone-bg">
+                                    <div id="layout-preview">
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -167,7 +173,7 @@
 
         var socket = io.connect(new_uri);
         socket.on('news', function (data) {
-            $(".waiting-list").html(data);
+            $(".drop-articles-here").html(data);
         });
         socket.on('refresh', function(serialized) {
             console.log('refresh' + (i++));
