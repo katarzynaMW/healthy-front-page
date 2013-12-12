@@ -6085,6 +6085,8 @@ body {
   }
 }*/
 .main-preview .panel-body {
+    height: 90%;
+    overflow-y: auto;
     text-align: center;
 }
 .main-preview #phone-mockup {
@@ -6111,6 +6113,9 @@ body {
     overflow-x: hidden;
     text-align: left;
 }
+.main-preview #phone-mockup #phone-bg #layout-preview img {
+    max-width: 148px;
+}
 .main-preview #phone-mockup #phone-bg #layout-preview .gridster li {
     background-color: transparent;
     border: 1px solid #D3D3D3;
@@ -6118,6 +6123,9 @@ body {
 .main-preview #phone-mockup #phone-bg #layout-preview .gridster li[data-sizex="2"] img {
     float: left;
     margin-right: 5px;
+}
+.main-preview #phone-mockup #phone-bg #layout-preview .gridster li[data-sizex="2"] .title {
+    font-size: 120%;
 }
 .main-preview .article-list-container .title {
     color: black;
