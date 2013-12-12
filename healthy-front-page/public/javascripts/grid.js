@@ -36,7 +36,10 @@ hfp.gridster = $(".gridster ul").gridster({
     .data('gridster'); // this extracts the API object from the jQ dom object
 hfp.gridster.generate_stylesheet();
 
+var interval;
+
 hfp.buildFromSerialized = function(serialized) {
+    clearInterval(interval);
     console.log(serialized);
     console.log(+new Date());
     hfp.gridster.remove_all_widgets();
@@ -45,7 +48,7 @@ hfp.buildFromSerialized = function(serialized) {
         console.log('processing id ' + id);
         hfp.gridster.add_widget('<li data-id="' + id + '" />', this.size_x, this.size_y, this.col, this.row);
     });
-    setInterval(function() {
+    interval = setInterval(function() {
     $.each(serialized, function() {
         var $newTile, id = this.id;
         $newTile = $('.gridster li[data-id="' + id + '"]').eq(0);
