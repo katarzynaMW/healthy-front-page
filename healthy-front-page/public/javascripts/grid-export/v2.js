@@ -13,19 +13,33 @@ hfp.serializer2 = (function() {
             return (cell1.row < cell2.row ? -1 : (cell2.row < cell1.row ? 1 : (cell1.col - cell2.col)));
         };
 
+    function new_row() {
+        return jQuery('<div class="gridRow"></div>');
+    }
+
     function serialize() {
         var serialized = hfp.gridster.serialize(),
-            output = [],
-            item;
+            output = jQuery('<div></div>'),
+            item,
+            current_row,
+            last_row_num = 1;
 
         serialized.sort(byPosition).reverse(); // popping is faster, but walks backwards
+
+        current_row = new_row();
         while (item = serialized.pop()) {
-            output.push(item.$el
+            var current_row_number = item.row;
+            if (current_row_number != last_row_num) {
+                output.append(current_row);
+                current_row = new_row();
+            }
+            current_row.append(item.$el.clone()
+                .addClass('gridUnit')
                 .addClass('span' + item.size_x)
                 .addClass('yspan' + item.size_y));
         }
 
-        return output;
+        return output.html();
     }
 
     return {
