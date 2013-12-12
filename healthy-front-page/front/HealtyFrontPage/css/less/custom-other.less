@@ -36,7 +36,17 @@ html, body {
   height: 100%;
 }
 
+.navbar-brand {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .app-col {
+  img {
+    max-width: 100%;
+  }
+
   & > * {
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
@@ -53,6 +63,7 @@ html, body {
   height:  100%;
 }
 
+
 // Article waiting list
 
 .waiting-list {
@@ -64,16 +75,37 @@ html, body {
       padding: 5px;
       height: 100%;
       overflow-y: scroll;
+
+      li.new .article-list-container {
+        background-color: #627384;
+        transition: background-color 1s ease 0s;
+      }
     }
   }
+
   .article-list-container {
     .well;
+    position:  relative;
     padding: 10px;
+    transition: background-color 1s ease 0s;
 
     .article-image {
       max-width: 100%;
     }
+
+    time {
+      display: block;
+      font-size: 14px;
+      color: darken(@gray, 5%);
+    }
   }
+}
+
+.article-add,
+.article-remove {
+  position:  absolute;
+  top: 5px;
+  right:  5px;
 }
 
 // Main preview
@@ -146,14 +178,84 @@ html, body {
         width: 90%;
         overflow-y: auto;
         overflow-x: hidden;
+        text-align: left;
       }
     }
+  }
+
+  .article-add,
+  time {
+    .hidden;
   }
 }
 
 .btn-export {
   padding: 10px 30px;
   margin-top: 5px;
+}
+
+// Progress bar
+
+@barColor: tomato;
+@overlayColor: #fffde8;
+@backColor: #2f3439;
+
+.progress-radial {
+  box-shadow: 0 0 5px #FFFFFF;
+  background-color: #FF6347;
+  border: 2px solid #2F3439;
+  border-radius: 50%;
+  float: left;
+  height: 40px;
+  position: absolute;
+  width: 40px;
+  top: 5px;
+  left: 5px;
+}
+.progress-radial .overlay {
+  background-color: rgba(128,128,128,0.5);
+  border-radius: 50%;
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  margin-left: 3px;
+  margin-top: 3px;
+  position: absolute;
+  text-align: center;
+  width: 30px;
+}
+.progress-radial[data-popularity="0"] {
+  background-image: linear-gradient(90deg, @backColor 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(90deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="10"] {
+  background-image: linear-gradient(90deg, @backColor 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(126deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="20"] {
+  background-image: linear-gradient(90deg, @backColor 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(162deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="30"] {
+  background-image: linear-gradient(90deg, @backColor 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(198deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="40"] {
+  background-image: linear-gradient(90deg, @backColor 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(234deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="50"] {
+  background-image: linear-gradient(-90deg, #FF6347 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(270deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="60"] {
+  background-image: linear-gradient(-54deg, #FF6347 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(270deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="70"] {
+  background-image: linear-gradient(-18deg, #FF6347 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(270deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="80"] {
+  background-image: linear-gradient(18deg, #FF6347 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(270deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="90"] {
+  background-image: linear-gradient(54deg, #FF6347 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(270deg, #FF6347 50%, @backColor 50%, @backColor);
+}
+.progress-radial[data-popularity="100"] {
+  background-image: linear-gradient(90deg, #FF6347 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)), linear-gradient(270deg, #FF6347 50%, @backColor 50%, @backColor);
 }
 
 // Other
@@ -166,6 +268,20 @@ html, body {
 .btn-shadow-inverse(@color) {
 	#gradient > .vertical-three-colors(darken(@color, 24%), darken(@color, 18%), 40%, darken(@color, 14%));
 	filter: none;
+}
+
+button.article-add {
+  background-color: @brand-success;
+  .glyphicon:before {
+    content: "\2b";
+  }
+}
+
+button.article-remove {
+  background-color: @brand-danger;
+  .glyphicon:before {
+    content: "\e014";
+  }
 }
 
 // Navbar =====================================================================
