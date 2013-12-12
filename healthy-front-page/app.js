@@ -71,7 +71,7 @@ io.sockets.on('connection', function(socket) {
 	}
 
 function waitingListArticle(json) {
-	return "<li class=\""+ (json.isNew ? 'new' : '') +"\">" + 
+	return "<li class=\""+ (json.isNew ? 'new' : '') +"\" data-id=\""+json.id+"\">" + 
 	img(json.image) + 
 	div(json.published) + 
 	div(json.title)  +"</li>";
