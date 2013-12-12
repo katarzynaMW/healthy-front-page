@@ -2,7 +2,8 @@
     width: 320px;
     position:relative;
 }
-#mainGrid li {
+.gridster li {
     background: silver;
     list-style: none;
 }
+

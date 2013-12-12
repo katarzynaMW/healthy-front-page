@@ -13,7 +13,7 @@ hfp.gridster = $(".gridster ul").gridster({
     max_cols               : 2,
     resize                 : {
         enabled : true,
-        max_size: [2, 1],
+        max_size: [2, 2], // todo change to 2,1 maybe
         stop    : hfp.sendUpdate
     },
     serialize_params       : function($w, wgd) {
