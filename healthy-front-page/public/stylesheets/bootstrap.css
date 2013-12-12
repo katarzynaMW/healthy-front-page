@@ -6085,6 +6085,8 @@ body {
   }
 }*/
 .main-preview .panel-body {
+    height: 90%;
+    overflow-y: auto;
     text-align: center;
 }
 .main-preview #phone-mockup {
