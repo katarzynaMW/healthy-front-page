@@ -36,6 +36,10 @@ app.get('/sockets', function(req, res) {
 	res.render('socket', { title: 'Express WebSockets' });
 });
 
+app.get('/articles',function(req, res) {
+    res.render('articles', { title: 'Front page articles' });
+});
+
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
@@ -67,7 +71,7 @@ io.sockets.on('connection', function(socket) {
 	}
 
 function waitingListArticle(json) {
-	return "<li class=\""+ (json.isNew ? 'new' : '') +"\">" + 
+	return "<li class=\""+ (json.isNew ? 'new' : '') +"\" data-id=\""+json.id+"\">" + 
 	img(json.image) + 
 	div(json.published) + 
 	div(json.title)  +"</li>";

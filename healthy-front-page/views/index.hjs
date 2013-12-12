@@ -43,29 +43,21 @@
     </script>
     <script src='/javascripts/grid.js'></script>
     <script src='/javascripts/grid-export/v1.js'></script>
-    <script src='/javascripts/grid-export/v2.js'></script>
-    <script src="/javascripts/articles-queue.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', ready, false);
-        function ready() {
-            var fpArticlesId = $('#articleList');
-            var articlesQueue = new ArticlesQueue(fpArticlesId);
-        }
-    </script>
+    <script src='/javascripts/grid-export/v2.js'></script>    
     <script>
         // 1. SETUP: choose implementation
         hfp.serializer = hfp.serializer2; // now you can call hfp.serialize() to get HTML or array
 
         // 1.5: UTILITY METHOD
         hfp.log = function(header, stuff) {
-                if (typeof stuff === 'string') {
-                    console.log('[' + header + '] ' + stuff)
-                } else {
-                    console.group('[' + header + ']');
-                    console.dir(stuff);
-                    console.groupEnd();
-                }
-            };
+            if (typeof stuff === 'string') {
+                console.log('[' + header + '] ' + stuff)
+            } else {
+                console.group('[' + header + ']');
+                console.dir(stuff);
+                console.groupEnd();
+            }
+        };
 
         // 2. DO SHIT:
         $body = jQuery('body'),
