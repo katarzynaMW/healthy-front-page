@@ -19,6 +19,7 @@ hfp.gridster = $(".gridster ul").gridster({
     serialize_params       : function($w, wgd) {
         return {
             //$el: $w,
+            id    : $.data('id'),
             col   : wgd.col,
             row   : wgd.row,
             size_x: wgd.size_x,
@@ -35,7 +36,16 @@ hfp.gridster.generate_stylesheet();
 hfp.buildFromSerialized = function(serialized) {
     hfp.gridster.remove_all_widgets();
     $.each(serialized, function() {
-        hfp.gridster.add_widget('<li />', this.size_x, this.size_y, this.col, this.row);
+        var $newTile, id = this.id;
+        hfp.gridster.add_widget('<li data-id="' + id + '" />', this.size_x, this.size_y, this.col, this.row);
+        $newTile = $('.gridster [data-id="' + id + '"]');
+        if (id && $newTile.children().length == 0) {
+            // please populate me
+            console.log('tile ' + id + ' needs populating');
+            $.get('/article/'+id, function(data) {
+                $newTile.html(data);
+            });
+        }
     });
     $('style:not(:last-of-type)').remove();
 };
