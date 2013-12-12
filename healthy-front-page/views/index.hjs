@@ -43,14 +43,5 @@
     </script>
     <script src='/javascripts/grid.js'></script>
     <script src='/javascripts/grid-export/v1.js'></script>
-    <script src="/js/articles-queue"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', ready, false);
-        function ready() {
-            var fpArticlesId = $('#articleList');
-            var articlesQueue = new ArticlesQueue(fpArticlesId);
-        }
-    </script>
-
   </body>
 </html>

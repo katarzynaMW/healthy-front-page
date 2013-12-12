@@ -35,6 +35,10 @@ app.get('/sockets', function(req, res) {
 	res.render('socket', { title: 'Express WebSockets' });
 });
 
+app.get('/articles',function(req, res) {
+    res.render('articles', { title: 'Front page articles' });
+});
+
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

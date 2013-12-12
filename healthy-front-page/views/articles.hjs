@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/jquery.gridster.css' />
+    <style>
+        .articles-list {
+
+        }
+        .article {
+            display: block;
+            border: 1px solid #acacac;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 10px;
+            position: relative;
+            background: #FFF;
+        }
+
+        .article-add {
+            color: red;
+            position: absolute;
+            bottom: 0;
+            right:0;
+            text-decoration: none;
+        }
+        .published {
+            background: grey;
+        }
+
+    </style>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <p>Welcome to {{ title }}</p>
+
+    <div id="mainGrid">
+        <div class="gridster">
+            <ul id="articleList" class="articles-list">
+               <li id="ap7403795" class="article">Vil fjerne helsepersonellets taushetsplikt i straffesaker<a href="#" class="article-add">+</a></li>
+               <li id="vertikal57561" class="article">Familie på fem ble ranet med gevær<a href="#" class="article-add">+</a></li>
+               <li id="common407825" class="article">Får 325.000 kr etter å ha blitt syk på ferie<a href="#" class="article-add">+</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- libraries -->
+    <script src='/javascripts/jquery-2.0.3.min.js'></script>
+
+    <!-- env and our scripts -->
+    <script src="/javascripts/articles-queue.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', ready, false);
+        function ready() {
+        var articlesQueue = new ArticlesQueue('#articleList');
+            $('.article-add').each(function() {
+                $(this).on('click', function() {
+                    var parentId = $(this).parent().attr('id');
+                    articlesQueue.add(parentId);
+                });
+            });
+        }
+    </script>
+
+  </body>
+</html>
