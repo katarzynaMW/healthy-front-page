@@ -63,6 +63,13 @@ html, body {
   height:  100%;
 }
 
+.header-ap {
+  background: url("../img/header-ap.png") no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+  height: 50px;
+  margin-bottom: 10px;
+
+}
+
 
 // Article waiting list
 
@@ -169,6 +176,7 @@ html, body {
       position: relative;
 
       #layout-preview {
+        background-color: rgb(240, 240, 240);
         border: 1px solid @gray;
         height: 568px;
         width: 320px;
@@ -180,6 +188,13 @@ html, body {
         overflow-x: hidden;
         text-align: left;
       }
+    }
+  }
+
+  .article-list-container {
+    .title {
+      color:  black;
+      font-weight: bold;
     }
   }
 
