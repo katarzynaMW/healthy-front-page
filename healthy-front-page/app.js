@@ -54,7 +54,7 @@ io.sockets.on('connection', function(socket) {
 			  	var articles = JSON.parse(body);
 			  	var content = articles.map(checkNew).map(waitingListArticle).join("");
 			  	existingArticles = articles;
-			    socket.emit("news", "<ul>" + content + "</ul>");
+			    socket.emit("news", content);
 			}
 		})
 	}, 10000);
@@ -71,19 +71,33 @@ io.sockets.on('connection', function(socket) {
 	}
 
 function waitingListArticle(json) {
-	return "<li class=\""+ (json.isNew ? 'new' : '') +"\" data-id=\""+json.id+"\">" + 
+	return "<li class=\""+ (json.isNew ? 'new' : '') +"\" data-id=\""+json.id+"\"><article class=\"article-list-container\">" + 
 	img(json.image) + 
-	div(json.published) + 
-	div(json.title)  +"</li>";
+	time(json.published) + 
+	p(json.title) +
+	addButton() + 
+	"</article></li>";
+}
+
+function addButton() {
+	return "<button class=\"article-add btn btn-success btn-sm\" type=\"button\"><i class=\"glyphicon glyphicon-plus\"></i><span class=\"sr-only\">Add</span></button>";
 }
 
 function div(str) {
 	return "<div>" + str + "</div>";
 }
 
+function p(str) {
+	return "<p class=\"title\">" + str + "</p>";
+}
+
+function time(str) {
+	return "<time>" + str + "</time>";
+}
+
 function img(str) {
 	if(str) {
-		return "<img src=\""+str+"\"/>";	
+		return "<img  class=\"article-image\" src=\""+str+"\"/>";	
 	} else {
 		return "";
 	}
