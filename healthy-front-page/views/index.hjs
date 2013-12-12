@@ -183,6 +183,15 @@
       });
     </script>
     <script src="/javascripts/bootstrap.min.js"></script>
+    <script>
+        $(function(){ //DOM Ready
+
+
+            $(".article-add").on('click', function() {
+                window.alert('article-add');
+            });
+        });
+    </script>
 
   </body>
 </html>
