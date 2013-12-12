@@ -4,6 +4,8 @@
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/jquery.gridster.css' />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/jquery-2.0.3.min.js"></script>
   </head>
   <body>
     <h1>{{ title }}</h1>
@@ -33,6 +35,8 @@
         </div>
     </div>
 
+     <div class="waiting-list"></div>
+
     <!-- libraries -->
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
     <script src='/javascripts/jquery.gridster.js'></script>
@@ -50,6 +54,22 @@
             var fpArticlesId = $('#articleList');
             var articlesQueue = new ArticlesQueue(fpArticlesId);
         }
+    </script>
+
+    <script>
+      var loc = window.location, new_uri;
+      if (loc.protocol === "https:") {
+          new_uri = "wss:";
+      } else {
+          new_uri = "ws:";
+      }
+      new_uri += "//" + loc.host;
+
+
+      var socket = io.connect(new_uri);
+      socket.on('news', function (data) {
+        $(".waiting-list").html(data);
+      });
     </script>
 
   </body>
