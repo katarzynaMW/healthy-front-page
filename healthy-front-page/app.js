@@ -11,8 +11,7 @@ var path = require('path');
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
-
-
+var request = require('request');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -41,14 +40,23 @@ server.listen(app.get('port'), function(){
 });
 
 
-// setInterval(function() {
-	// 
-// }, 10000);
+
+var existingArticles = [];
 
 io.sockets.on('connection', function(socket) {
 	setInterval(function() {
-		socket.emit('news', {hello: 'world'})
-	}, 1000);
+		request('http://api.snd.no/apiconverter/healthyFrontPage/auto', 
+			function (error, response, body) {
+			  if (!error && response.statusCode == 200) {
+			  	var content = JSON.parse(body).map(waitingListArticle).join("")
+			    socket.emit("news", "<ul>" + content + "</ul>");
+			}
+		})
+	}, 10000);
 });
+
+function waitingListArticle(json) {
+	return "<li>" + json.title + "</li>";
+}
 
 

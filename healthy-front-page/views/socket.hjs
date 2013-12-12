@@ -5,10 +5,13 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/jquery.gridster.css' />
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/jquery-2.0.3.min.js"></script>
   </head>
   <body>
     <h1>{{ title }} WebSockets test</h1>
     <p>Welcome to {{ title }}</p>
+
+    <div class="waiting-list"></div>
 
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
     <script src='/javascripts/jquery.gridster.js'></script>
@@ -25,7 +28,7 @@
 
       var socket = io.connect(new_uri);
       socket.on('news', function (data) {
-        console.log(data);
+        $(".waiting-list").html(data);
       });
     </script>
   </body>
