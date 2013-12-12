@@ -79,7 +79,14 @@
                             <div id="phone-mockup">
                                 <div id="phone-bg">
                                     <div id="layout-preview">
-
+                                        <!--THE GRID<sup><a href="http://www.youtube.com/watch?v=ZITCw6QKrtU">1</a></sup>:-->
+                                        <div class="gridster">
+                                            <ul>
+                                                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">a</li>
+                                                <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">b</li>
+                                                <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">c</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -108,16 +115,9 @@
     </div>
 
 
-    <div id="mainGrid">
-        THE GRID<sup><a href="http://www.youtube.com/watch?v=ZITCw6QKrtU">1</a></sup>:
-        <div class="gridster">
-            <ul>
-                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">a</li>
-                <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">b</li>
-                <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">c</li>
-            </ul>
-        </div>
-    </div>
+
+
+
 
 
 
