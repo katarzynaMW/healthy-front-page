@@ -4,7 +4,7 @@ function ArticlesQueue(id) {
             //remove from fp list
             var articlesDOMList = $(id).children();
             var articleDom = articlesDOMList.filter(function(index){
-                if(articlesDOMList[index].getAttribute('id') == articleId) {
+                if(articlesDOMList[index].getAttribute('data-map') == articleId) {
                     return true;
                 }
             });
