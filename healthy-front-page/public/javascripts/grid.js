@@ -19,7 +19,10 @@ hfp.gridster = $(".gridster ul").gridster({
     serialize_params       : function($w, wgd) {
         return {
             //$el: $w,
-            id    : function() { console.log($w.data('id')); return $w.data('id'); }(),
+            id    : function() {
+                console.log($w.data('id'));
+                return $w.data('id');
+            }(),
             col   : wgd.col,
             row   : wgd.row,
             size_x: wgd.size_x,
@@ -37,14 +40,18 @@ hfp.buildFromSerialized = function(serialized) {
     hfp.gridster.remove_all_widgets();
     $.each(serialized, function() {
         var $newTile, id = this.id;
+        console.log('processing id ' + id);
         hfp.gridster.add_widget('<li data-id="' + id + '" />', this.size_x, this.size_y, this.col, this.row);
         $newTile = $('.gridster li[data-id="' + id + '"]').eq(0);
-        if (id && $newTile.find('article').length == 0) {
+        if (id && $newTile.find('article').length === 0) {
             // please populate me
             console.log('tile ' + id + ' needs populating');
-            $.get('/article/' + id, function(data) {
-                $newTile.html(data);
-            });
+            (function(id) {
+                $.get('/article/' + id, function(data) {
+                    console.log('got content for id '+id+': '+data);
+                    $newTile.html(data);
+                });
+            })(id);
         }
     });
     $('style:not(:last-of-type)').remove();
