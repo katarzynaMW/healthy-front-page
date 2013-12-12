@@ -11,11 +11,36 @@
 
     <div id="mainGrid">
         THE GRID<sup><a href="http://www.youtube.com/watch?v=ZITCw6QKrtU">1</a></sup>:
-        {{> grid}}
+        <div class="gridster">
+            <ul>
+                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1"></li>
+                <li data-row="2" data-col="1" data-sizex="1" data-sizey="1"></li>
+                <li data-row="3" data-col="1" data-sizex="1" data-sizey="1"></li>
+
+                <li data-row="1" data-col="2" data-sizex="2" data-sizey="1"></li>
+                <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"></li>
+
+                <li data-row="1" data-col="4" data-sizex="1" data-sizey="1"></li>
+                <li data-row="2" data-col="4" data-sizex="2" data-sizey="1"></li>
+                <li data-row="3" data-col="4" data-sizex="1" data-sizey="1"></li>
+
+                <li data-row="1" data-col="5" data-sizex="1" data-sizey="1"></li>
+                <li data-row="3" data-col="5" data-sizex="1" data-sizey="1"></li>
+
+                <li data-row="1" data-col="6" data-sizex="1" data-sizey="1"></li>
+                <li data-row="2" data-col="6" data-sizex="1" data-sizey="2"></li>
+            </ul>
+        </div>
     </div>
 
+    <!-- libraries -->
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
     <script src='/javascripts/jquery.gridster.js'></script>
+
+    <!-- env and our scripts -->
+    <script>
+        var hfp = hfp || {}; // our namespace
+    </script>
     <script src='/javascripts/grid.js'></script>
     <script src='/javascripts/grid-export/v1.js'></script>
     <script src="/js/articles-queue"></script>
