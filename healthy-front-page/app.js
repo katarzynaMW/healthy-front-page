@@ -54,6 +54,17 @@ server.listen(app.get('port'), function(){
 });
 
 var existingArticles = [];
+var webhits = [];
+
+setInterval(function() {
+	request('https://webhit.snd.no/webhit/php/getwidgetdata.php?widget=hackday2013&site=ap', 
+			function (error, response, body) {
+			  if (!error && response.statusCode == 200) {
+			  	webhits = JSON.parse(body).last5;
+			}
+		});
+	
+}, 5000);
 
 io.sockets.on('connection', function(socket) {
     socket.on('preview', function(data) {
@@ -66,7 +77,7 @@ io.sockets.on('connection', function(socket) {
 			function (error, response, body) {
 			  if (!error && response.statusCode == 200) {
 			  	var articles = JSON.parse(body);
-			  	var content = articles.map(checkNew).map(waitingListArticle).join("");
+			  	var content = articles.map(checkNew).map(webhit).map(waitingListArticle).join("");
 			  	existingArticles = articles;
 			    socket.emit("news", content);
 			}
@@ -77,13 +88,32 @@ io.sockets.on('connection', function(socket) {
 			function (error, response, body) {
 			  if (!error && response.statusCode == 200) {
 			  	var articles = JSON.parse(body);
-			  	var content = articles.map(checkNew).map(waitingListArticle).join("");
+			  	var content = articles.map(checkNew).map(webhit).map(waitingListArticle).join("");
 			  	existingArticles = articles;
 			    socket.emit("news", content);
 			}
 		});
 	}, 5000);
 });
+
+
+	function webhit(json) {
+
+
+		var wh = _.find(webhits, function(e, i) { 
+			return e.url == json.url; 
+		});
+
+	
+		var cloned = cloneObj(json);
+		if(wh) {
+			cloned.score = Math.ceil(wh.clicks / 10) * 10;;
+			return cloned;
+		} else {
+			cloned.score = 0;
+			return cloned;
+		}
+	}
 
 	function checkNew(json) {
 		var article = _.find(existingArticles, function(e, i){ return e.id == json.id; });
@@ -105,11 +135,16 @@ function article(json) {
 	time(json.published) + 
 	p(json.title) +
 	addButton() + 
+	trendingButton(json.score) + 
 	"</article>";
 }
 
 function addButton() {
 	return "<button class=\"article-add btn btn-sm\" type=\"button\"><i class=\"glyphicon \"></i><span class=\"sr-only\">Add</span></button>";
+}
+
+function trendingButton(score) {
+	return "<div class=\"progress-radial\" data-popularity=\""+score+"\"> <div class=\"overlay\">"+score+"</div> </div>";
 }
 
 function div(str) {
