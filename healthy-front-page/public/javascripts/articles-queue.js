@@ -1,13 +1,9 @@
 document.addEventListener('DOMContentLoaded', ready, false);
 
 function ready() {
-    console.log('ready');
     var articleDataMap = 'data-id';
-    var articlesQueue = new ArticlesQueue('.drop-articles-here', 'published', articleDataMap);
 
-    var addCallback = function() {
-        socket.emit('added', {});
-    }
+    var articlesQueue = new ArticlesQueue('.drop-articles-here', 'published', articleDataMap);
 
     $('.drop-articles-here').on("click",".article-add", function() {
         var parentId = $(this).closest('li').attr(articleDataMap);
@@ -33,7 +29,7 @@ function ArticlesQueue(id, publishedClassName, articleDataMap, addCb) {
             });
             listElement.find('.article-add').removeClass('article-add').addClass('article-remove');
             gridster.add_widget(listElement);
-            addCb();
+            hfp.sendUpdate();
         },
         remove: {
 
