@@ -1,10 +1,16 @@
+/*global hfp*/
 $(function() {
 
     var $body = jQuery('body'),
-        $btn = jQuery('<button>test</button>').on('click', btnClick).appendTo($body);
+        $serializeBtn = jQuery('<button>serialize</button>')
+            .on('click', serialize)
+            .appendTo($body);
 
-    function btnClick() {
-        alert('hello');
+    function serialize() {
+        console.log(hfp.gridster);
+        var serialized = hfp.gridster.serialize();
+        console.log(serialized);
+        alert(JSON.stringify(serialized));
     }
 
 });
