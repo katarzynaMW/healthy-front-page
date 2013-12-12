@@ -5,6 +5,15 @@ hfp.gridster = $(".gridster ul").gridster({
     resize                 : {
         enabled : true,
         max_size: [3, 3]
+    },
+    serialize_params       : function($w, wgd) {
+        return {
+            $el: $w,
+            col: wgd.col,
+            row: wgd.row,
+            size_x: wgd.size_x,
+            size_y: wgd.size_y
+        }
     }
 })
     .data('gridster'); // this extracts the API object from the jQ dom object

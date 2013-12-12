@@ -1,19 +1,6 @@
-/*global hfp*/
-$(function() {
-
-    var $body = jQuery('body'),
-        $serializeBtn = jQuery('<button>serialize v1</button>')
-            .on('click', serialize)
-            .appendTo($body),
-        log = function(stuff) {
-            if (typeof stuff === 'string') {
-                console.log('[grid-export basic] ' + stuff)
-            } else {
-                console.group('[grid-export basic]');
-                console.dir(stuff);
-                console.groupEnd();
-            }
-        }
+/*global hfp */
+var hfp = hfp || {};
+hfp.serializer1 = (function() {
 
     function serialize() {
         /* this was actually supposed to return the absolute things */
@@ -23,7 +10,10 @@ $(function() {
 
             output = '<style>' + css + '</style>' + html;
 
-        log({css: css, html: html, output: output});
+        return output;
     }
 
-});
+    return {
+        serialize: serialize
+    }
+})();
