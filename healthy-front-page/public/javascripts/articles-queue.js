@@ -5,13 +5,22 @@ function ready() {
     var articleDataMap = 'data-id';
     var articlesQueue = new ArticlesQueue('.drop-articles-here', 'published', articleDataMap);
 
-        $('.drop-articles-here').on("click",".article-add", function() {
-            var parentId = $(this).closest('li').attr(articleDataMap);
-            articlesQueue.add(parentId);
-        });
+    var addCallback = function() {
+        socket.emit('added', {});
+    }
+
+    $('.drop-articles-here').on("click",".article-add", function() {
+        var parentId = $(this).closest('li').attr(articleDataMap);
+        articlesQueue.add(parentId);
+    });
+
+    $('.gridster').on("click",".article-remove", function() {
+        var parentId = $(this).closest('li').attr(articleDataMap);
+        articlesQueue.add(parentId);
+    });
 }
 
-function ArticlesQueue(id, publishedClassName, articleDataMap) {
+function ArticlesQueue(id, publishedClassName, articleDataMap, addCb) {
     var gridster = $(".gridster ul").gridster().data('gridster');
     return {
         add: function(articleId) {
@@ -22,8 +31,9 @@ function ArticlesQueue(id, publishedClassName, articleDataMap) {
                     return true;
                 }
             });
-            listElement.addClass(publishedClassName);
+            listElement.find('.article-add').removeClass('article-add').addClass('article-remove');
             gridster.add_widget(listElement);
+            addCb();
         },
         remove: {
 
