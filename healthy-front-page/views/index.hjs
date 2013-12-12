@@ -33,8 +33,14 @@
         </div>
     </div>
 
+    <!-- libraries -->
     <script src='/javascripts/jquery-2.0.3.min.js'></script>
     <script src='/javascripts/jquery.gridster.js'></script>
+
+    <!-- env and our scripts -->
+    <script>
+        var hfp = hfp || {}; // our namespace
+    </script>
     <script src='/javascripts/grid.js'></script>
     <script src='/javascripts/grid-export/v1.js'></script>
     <script src="/js/articles-queue"></script>
