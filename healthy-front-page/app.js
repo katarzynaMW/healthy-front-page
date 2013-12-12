@@ -109,7 +109,7 @@ function article(json) {
 }
 
 function addButton() {
-	return "<button class=\"article-add btn btn-success btn-sm\" type=\"button\"><i class=\"glyphicon glyphicon-plus\"></i><span class=\"sr-only\">Add</span></button>";
+	return "<button class=\"article-add btn btn-sm\" type=\"button\"><i class=\"glyphicon \"></i><span class=\"sr-only\">Add</span></button>";
 }
 
 function div(str) {
