@@ -3,7 +3,7 @@
     position:relative;
 }
 .gridster li {
-    background: silver;
+    background: #333;
     list-style: none;
 }
 
