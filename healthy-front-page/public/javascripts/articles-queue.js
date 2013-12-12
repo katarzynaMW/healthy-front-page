@@ -23,8 +23,7 @@ function ArticlesQueue(id, publishedClassName, articleDataMap) {
                 }
             });
             listElement.addClass(publishedClassName);
-            var article = listElement.html();
-            gridster.add_widget(article);
+            gridster.add_widget(listElement);
         },
         remove: {
 
