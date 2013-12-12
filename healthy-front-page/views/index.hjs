@@ -105,7 +105,7 @@
 
     <!-- env and our scripts -->
     <script>
-        var hfp = hfp || {}; // our namespace
+        var healthyFront = healthyFront || {}; // our namespace
     </script>
     <script src='/javascripts/grid.js'></script>
     <!--<script src='/javascripts/grid-export/v1.js'></script>-->
@@ -113,10 +113,10 @@
 
     <script>
         // 1. SETUP: choose implementation
-        hfp.serializer = hfp.serializer2; // now you can call hfp.serialize() to get HTML or array
+        healthyFront.serializer = healthyFront.serializer2; // now you can call healthyFront.serialize() to get HTML or array
 
         // 1.5: UTILITY METHOD
-        hfp.log = function(header, stuff) {
+        healthyFront.log = function(header, stuff) {
             if (typeof stuff === 'string') {
                 console.log('[' + header + '] ' + stuff)
             } else {
@@ -130,8 +130,8 @@
         $body = jQuery('body'),
             $serializeBtn = jQuery('<button>save</button>')
                 .on('click', function() {
-                    var ser =  hfp.serializer.serialize();
-                    hfp.log('serialized grid', ser);
+                    var ser =  healthyFront.serializer.serialize();
+                    healthyFront.log('serialized grid', ser);
                     socket.emit('save', ser);
                 })
                 .appendTo($body)
@@ -149,23 +149,16 @@
 
         var socket = io.connect(new_uri);
         socket.on('news', function (data) {
+            // new news has arrived
             $(".drop-articles-here").html(data);
         });
         socket.on('refresh', function(serialized) {
+            // new layout has arrived
+            // TODO handle concurrent edits gracefully
             console.log('refresh' + (i++));
-            hfp.buildFromSerialized(serialized);
+            healthyFront.buildFromSerialized(serialized);
         })
     </script>
     <script src="/javascripts/bootstrap.min.js"></script>
-    <script>
-        $(function(){ //DOM Ready
-
-
-            $(".article-add").on('click', function() {
-                window.alert('article-add');
-            });
-        });
-    </script>
-
   </body>
 </html>
