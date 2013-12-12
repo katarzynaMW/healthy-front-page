@@ -105,13 +105,12 @@ io.sockets.on('connection', function(socket) {
 		});
 
 	
-		var cloned = cloneObj(json);
 		if(wh) {
-			cloned.score = Math.ceil(wh.clicks / 10) * 10;;
-			return cloned;
+			json.score = Math.ceil(wh.clicks / 10) * 10;;
+			return json;
 		} else {
-			cloned.score = 0;
-			return cloned;
+			json.score = 0;
+			return json;
 		}
 	}
 
@@ -140,7 +139,7 @@ function article(json) {
 }
 
 function addButton() {
-	return "<button class=\"article-add btn btn-sm\" type=\"button\"><i class=\"glyphicon \"></i><span class=\"sr-only\">Add</span></button>";
+	return "<button class=\"article-toggle btn btn-sm\" type=\"button\"><i class=\"glyphicon \"></i><span class=\"sr-only\">Add</span></button>";
 }
 
 function trendingButton(score) {
