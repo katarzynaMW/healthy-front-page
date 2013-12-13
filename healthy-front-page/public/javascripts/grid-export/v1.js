@@ -1,12 +1,12 @@
-/*global hfp */
-var hfp = hfp || {};
-hfp.serializer1 = (function() {
+/*global healthyFront */
+var healthyFront = healthyFront || {};
+healthyFront.serializer1 = (function() {
 
     function serialize() {
         /* this was actually supposed to return the absolute things */
 
         var css = $('head style').last().html(),
-            html = hfp.gridster.$el.html(),
+            html = healthyFront.gridster.$el.html(),
 
             output = '<style>' + css + '</style>' + html;
 

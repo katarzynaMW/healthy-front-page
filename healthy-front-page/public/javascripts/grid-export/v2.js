@@ -1,6 +1,6 @@
-/*global hfp */
-var hfp = hfp || {};
-hfp.serializer2 = (function() {
+/*global healthyFront */
+var healthyFront = healthyFront || {};
+healthyFront.serializer2 = (function() {
 
     var checkCell = function(cell) {
             return typeof cell === 'object' && typeof cell.row === 'number' && typeof cell.col === 'number';
@@ -33,8 +33,8 @@ hfp.serializer2 = (function() {
 
 
     function serialize() {
-        return hfp.gridster.serialize();
-        /*var serialized = hfp.gridster.serialize(),
+        return healthyFront.gridster.serialize();
+        /*var serialized = healthyFront.gridster.serialize(),
             output = jQuery('<div></div>'),
             item,
             current_row,

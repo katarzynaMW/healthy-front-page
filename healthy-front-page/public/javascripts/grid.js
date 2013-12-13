@@ -1,6 +1,6 @@
-/*global hfp*/
-hfp.sendUpdate = function() {
-    var ser = hfp.serializer.serialize();
+/*global healthyFront*/
+healthyFront.sendUpdate = function() {
+    var ser = healthyFront.serializer.serialize();
     socket.emit('preview', ser);
 
     // gridster adds lots of <style> tags, clean up all but the last
@@ -8,7 +8,7 @@ hfp.sendUpdate = function() {
     $('style:not(:last-of-type)').remove();
 };
 
-hfp.gridster = $(".gridster ul").gridster({
+healthyFront.gridster = $(".gridster ul").gridster({
     widget_margins         : [5, 5],
     widget_base_dimensions : [150, 150], // IDEA: experiment with stuff like 150x80 with default 2x2 size, max 2x4
     autogenerate_stylesheet: true,
@@ -16,7 +16,7 @@ hfp.gridster = $(".gridster ul").gridster({
     resize                 : {
         enabled : true,
         max_size: [2, 2], // todo change to 2,1 maybe
-        stop    : hfp.sendUpdate,
+        stop    : healthyFront.sendUpdate,
         resize  : function(e, ui, $widget) {
             $widget.find('p.title').fitText();
         }
@@ -32,24 +32,24 @@ hfp.gridster = $(".gridster ul").gridster({
         }
     },
     draggable              : {
-        stop: hfp.sendUpdate
+        stop: healthyFront.sendUpdate
     }
 })
     .data('gridster'); // this extracts the API object from the jQ dom object
-hfp.gridster.generate_stylesheet();
+healthyFront.gridster.generate_stylesheet();
 
 var interval, // for bad hackaround over a bug possibly caused by gridster
     pending = {}; // for not requesting the same ID if already being fetched
 
-hfp.buildFromSerialized = function(serialized) {
+healthyFront.buildFromSerialized = function(serialized) {
     clearInterval(interval);
     console.log(serialized);
     console.log(+new Date());
-    hfp.gridster.remove_all_widgets();
+    healthyFront.gridster.remove_all_widgets();
     $.each(serialized, function() {
         var id = this.id;
         console.log('processing id ' + id);
-        hfp.gridster.add_widget('<li data-id="' + id + '" />',
+        healthyFront.gridster.add_widget('<li data-id="' + id + '" />',
             this.size_x, this.size_y, this.col, this.row);
     });
     // do not read the code below if you still respect us up to this point
@@ -64,7 +64,7 @@ hfp.buildFromSerialized = function(serialized) {
                 (function(id) {
                     pending[id] = true;
                     $.get('/article/' + id, function(data) {
-                        hfp.log('got content for id ' + id, data);
+                        healthyFront.log('got content for id ' + id, data);
                         $('.gridster li[data-id="' + id + '"]').append(data);
                         pending[id] = undefined;
                     })
