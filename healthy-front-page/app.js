@@ -42,7 +42,7 @@ app.get('/article/:id', function(req, res) {
 	var artId = req.params.id;
 	var json = _.find(existingArticles, function(e, i) { return e.id == artId; });
 	if(json) res.send(article(json));
-	else return res.send("nothing here");
+	else return res.send("<button class=\"article-toggle btn btn-sm\" type=\"button\"><i class=\"glyphicon \"></i><span class=\"sr-only\">Add</span></button>");
 });
 
 app.get('/articles', function(req, res) {
